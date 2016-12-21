@@ -124,7 +124,8 @@ MonoBehaviour:
   recognitionCount: 0
   playerNameText: {fileID: 1386261106}
   playerLengthText: {fileID: 600475412}
-  debugMode: 1
+  activeUser: 
+  debugMode: 0
 --- !u!4 &19989429
 Transform:
   m_ObjectHideFlags: 0

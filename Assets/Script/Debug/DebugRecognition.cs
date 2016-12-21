@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using Kinect;
 using System.Collections;
 
-public class PlayerRecognition : MonoBehaviour
+public class DebugRecognition : MonoBehaviour
 {
     [SerializeField]
     private KinectPointController kinectPointController;
@@ -11,20 +11,17 @@ public class PlayerRecognition : MonoBehaviour
     private SkeletonWrapper skeletonWrapper;
 
     [SerializeField]
-    private float playerLength;
+    float playerLength;
     [SerializeField]
-    private float cameraDistance;
+    float cameraDistance;
 
     [SerializeField]
-    private int recognitionCount;
+    int recognitionCount;
 
     [SerializeField]
     private Text playerNameText;
     [SerializeField]
     private Text playerLengthText;
-
-    [SerializeField]
-    private string activeUser;
 
     [SerializeField]
     private bool debugMode;
@@ -47,7 +44,7 @@ public class PlayerRecognition : MonoBehaviour
                 if (boneState[0, 0] == NuiSkeletonPositionTrackingState.Tracked &&
                     boneState[0, 3] == NuiSkeletonPositionTrackingState.Tracked &&
                     boneState[0, 15] == NuiSkeletonPositionTrackingState.Tracked &&
-                    boneState[0, 19] == NuiSkeletonPositionTrackingState.Tracked)
+                    boneState[0, 19] == NuiSkeletonPositionTrackingState.Tracked )
                 {
                     Debug.Assert(!debugMode, "Player bones are being tracked!");
 
@@ -60,9 +57,9 @@ public class PlayerRecognition : MonoBehaviour
                         kinectPointController.Hip_Center.transform.position.z) / 6;
 
                     // Getting the distance between the feet, hip and head.
-                    playerLength = Vector3.Distance(footDifference, kinectPointController.Hip_Center.transform.position) +
+                    playerLength = Vector3.Distance(footDifference, kinectPointController.Hip_Center.transform.position) + 
                         Vector3.Distance(kinectPointController.Hip_Center.transform.position, kinectPointController.Head.transform.position);
-
+                    
                     // Calculating our average heigth.                    
                     playerLength = cameraDistance / playerLength;
 
@@ -72,29 +69,38 @@ public class PlayerRecognition : MonoBehaviour
 
                     // Checking for the user: Pim.
                     if (playerLength >= 1.79f && playerLength <= 1.80f)
-                        CheckUser(NameData.pim);
-
+                    {
+                        playerNameText.text = "Our user is Pim";
+                        // As long as we are the same user we should add the recognitionCount with 1.
+                    }
                     // Checking for the user: Armin.
-                    else if (playerLength >= 1.74f && playerLength <= 1.76f)
-                        CheckUser(NameData.armin);
+                    if (playerLength >= 1.74f && playerLength <= 1.76f)
+                    {
+                        playerNameText.text = "Our user is Armin";
+                        // As long as we are the same user we should add the recognitionCount with 1.
 
-                    // Checking if the user is really big.
-                    else if (playerLength > 1.9f)
-                        CheckUser(NameData.giant);
+                    }
+                    if (playerLength > 1.9f)
+                    {
+                        playerNameText.text = "Our user is a Giant!";
 
-                    // Checking if the user is really small.
-                    else if (playerLength < 1.5f)
-                        CheckUser(NameData.hobbit);
+                    }
+                    if (playerLength < 1.71f)
+                    {
+                        playerNameText.text = "Our user is a Hobbit!";
 
-                    // This is statement is used when the length of the user isnt recognized in our database.
-                    else
-                        CheckUser(NameData.unregistered);
+                    }
 
                     playerLengthText.text = "Player is: " + playerLength + "m";
 
                     // Transition To the memory screen when we are sure who the player is.
-                    if (recognitionCount >= 5)
+                    if (recognitionCount >= 3)
                         TransitionToMemories();
+
+                    // Making sure we let know if the player isnt in our database.
+                    /*
+                    else
+                        playerNameText.text = "Our user is Unregistered";*/
                 }
 
                 // Check if the hip center, head and both feet are not being tracked.
@@ -111,29 +117,8 @@ public class PlayerRecognition : MonoBehaviour
         }
     }
 
-    void CheckUser(string userName)
-    {
-        print(recognitionCount);
-        // If this is the first time the user is recognized we need to reset the recognitionCount and set the activeUser.
-        if (activeUser != userName)
-        {
-            activeUser = userName;
-            recognitionCount = 0;
-        }
-
-        // As long as we are the same user we should add the recognitionCount with 1.
-        else if (activeUser == userName)
-        {
-            playerNameText.text = "Our user is "+ userName;
-
-            if (userName != NameData.unregistered)
-                recognitionCount++;
-        }
-    }
-
     void TransitionToMemories()
     {
-        playerNameText.text = "MEMORY SCENE!!!";
         StopAllCoroutines();
     }
 }
