@@ -9,21 +9,26 @@ public class PlayerRecognition : MonoBehaviour
     private KinectPointController kinectPointController;
     [SerializeField]
     private SkeletonWrapper skeletonWrapper;
-
     [SerializeField]
+    private PlayerData playerData;
+    [SerializeField]
+    private SceneSwitch sceneSwitch;
+    
     private float playerLength;
-    [SerializeField]
     private float cameraDistance;
-
-    [SerializeField]
+    
+    public int RecognitionCount
+    {
+        get { return recognitionCount; }
+    }
     private int recognitionCount;
+    [SerializeField]
+    private int maxRecognitionCount;
 
     [SerializeField]
     private Text playerNameText;
     [SerializeField]
     private Text playerLengthText;
-    
-    private string activeUser;
 
     [SerializeField]
     private bool debugMode;
@@ -56,7 +61,7 @@ public class PlayerRecognition : MonoBehaviour
                     // Getting an average distance of the camera and our player.
                     cameraDistance = (footDifference.z +
                         kinectPointController.Head.transform.position.z +
-                        kinectPointController.Hip_Center.transform.position.z) / 6;
+                        kinectPointController.Hip_Center.transform.position.z) / 3;
 
                     // Getting the distance between the feet, hip and head.
                     playerLength = Vector3.Distance(footDifference, kinectPointController.Hip_Center.transform.position) +
@@ -70,21 +75,21 @@ public class PlayerRecognition : MonoBehaviour
                     Debug.Assert(!debugMode, "Length: " + playerLength);
 
                     // Checking for the user: Raymon.
-                    if (playerLength >= 1.79f && playerLength <= 1.80f)
+                    if (playerLength >= NameData.raymonMinLength && playerLength <= NameData.raymonMaxLength)
                         CheckUser(NameData.raymon);
 
                     // Checking for the user: Armin.
-                    else if (playerLength >= 1.74f && playerLength <= 1.76f)
+                    else if (playerLength >= NameData.arminMinLength && playerLength <= NameData.arminMaxLength)
                         CheckUser(NameData.armin);
 
                     // This is statement is used when the length of the user isnt recognized in our database.
                     else
                         CheckUser(NameData.unregistered);
 
-                    playerLengthText.text = "Player is: " + playerLength + "m";
+                    playerLengthText.text = "Player H: " + playerLength;
 
                     // Transition To the memory screen when we are sure who the player is.
-                    if (recognitionCount >= 6)
+                    if (recognitionCount >= maxRecognitionCount)
                         TransitionToMemories();
                 }
 
@@ -104,19 +109,19 @@ public class PlayerRecognition : MonoBehaviour
 
     void CheckUser(string userName)
     {
-        print(recognitionCount);
         // If this is the first time the user is recognized we need to reset the recognitionCount and set the activeUser.
-        if (activeUser != userName)
+        if (playerData.ActiveUser != userName)
         {
-            activeUser = userName;
+            playerData.ActiveUser = userName;
             recognitionCount = 0;
         }
 
         // As long as we are the same user we should add the recognitionCount with 1.
-        else if (activeUser == userName)
+        else if (playerData.ActiveUser == userName)
         {
             playerNameText.text = "Our user is " + userName;
 
+            //print(recognitionCount);
             if (userName != NameData.unregistered)
                 recognitionCount++;
         }
@@ -125,6 +130,7 @@ public class PlayerRecognition : MonoBehaviour
     void TransitionToMemories()
     {
         playerNameText.text = "MEMORY SCENE!!!";
+        sceneSwitch.TransitionToScene("Scene1", true, false, 0);
         StopAllCoroutines();
     }
 }

@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
 public class RecognitionProgressCircle : MonoBehaviour
 {
@@ -8,15 +7,15 @@ public class RecognitionProgressCircle : MonoBehaviour
     private Image progressCircleImage;
 
     [SerializeField]
-    private DebugRecognition playerRecognition;
+    private PlayerRecognition playerRecognition;
 
-    private float progres;
+    private float progress;
 
 	void Update () {
-        progres = playerRecognition.RecognitionCount;
-        progres = (progres / 10) + 0.3f;
-        if (progres != 0.3f)
-            progressCircleImage.fillAmount = Mathf.Lerp(progressCircleImage.fillAmount, progres, 0.25f);
+        progress = playerRecognition.RecognitionCount;
+        progress = (progress / 10) + 0.3f;
+        if (progress != 0.3f)
+            progressCircleImage.fillAmount = Mathf.Lerp(progressCircleImage.fillAmount, progress, 0.25f);
         else
             progressCircleImage.fillAmount = 0;
 	}

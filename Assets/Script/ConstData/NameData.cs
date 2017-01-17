@@ -1,7 +1,7 @@
 ﻿public class NameData
 {
-    public const string armin = "Armin";
-    public const string raymon = "Raymon";
+    public const string armin = "ArminKarimiBirgani";
+    public const string raymon = "RaymonZoetigheid";
     public const string unregistered = "unregistered";
 
     public const float arminMinLength = 3.55f;
