@@ -22,8 +22,7 @@ public class PlayerRecognition : MonoBehaviour
     private Text playerNameText;
     [SerializeField]
     private Text playerLengthText;
-
-    [SerializeField]
+    
     private string activeUser;
 
     [SerializeField]
@@ -70,21 +69,13 @@ public class PlayerRecognition : MonoBehaviour
                     playerLength = Mathf.Abs(playerLength);
                     Debug.Assert(!debugMode, "Length: " + playerLength);
 
-                    // Checking for the user: Pim.
+                    // Checking for the user: Raymon.
                     if (playerLength >= 1.79f && playerLength <= 1.80f)
-                        CheckUser(NameData.pim);
+                        CheckUser(NameData.raymon);
 
                     // Checking for the user: Armin.
                     else if (playerLength >= 1.74f && playerLength <= 1.76f)
                         CheckUser(NameData.armin);
-
-                    // Checking if the user is really big.
-                    else if (playerLength > 1.9f)
-                        CheckUser(NameData.giant);
-
-                    // Checking if the user is really small.
-                    else if (playerLength < 1.5f)
-                        CheckUser(NameData.hobbit);
 
                     // This is statement is used when the length of the user isnt recognized in our database.
                     else
@@ -93,7 +84,7 @@ public class PlayerRecognition : MonoBehaviour
                     playerLengthText.text = "Player is: " + playerLength + "m";
 
                     // Transition To the memory screen when we are sure who the player is.
-                    if (recognitionCount >= 5)
+                    if (recognitionCount >= 6)
                         TransitionToMemories();
                 }
 
@@ -124,7 +115,7 @@ public class PlayerRecognition : MonoBehaviour
         // As long as we are the same user we should add the recognitionCount with 1.
         else if (activeUser == userName)
         {
-            playerNameText.text = "Our user is "+ userName;
+            playerNameText.text = "Our user is " + userName;
 
             if (userName != NameData.unregistered)
                 recognitionCount++;
