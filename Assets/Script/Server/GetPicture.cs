@@ -4,7 +4,7 @@ using System;
 
 public class GetPicture : MonoBehaviour {
 
-    private string _url = "http://localhost/CordaanFolder/";
+    private string _url = "http://rj-zoetigheid.nl/CordaanFolder/";
     private string _newUrl = "";
 
     private WWW _www;

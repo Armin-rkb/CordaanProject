@@ -12,7 +12,7 @@ public class Colors : MonoBehaviour {
 
     void Start()
     {
-        seasonSetting.OnSendSeason += ChangeColors;
+       // seasonSetting.OnSendSeason += ChangeColors;
     }
     void ChangeColors(int colorCode)
     {

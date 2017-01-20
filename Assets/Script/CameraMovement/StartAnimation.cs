@@ -18,7 +18,7 @@ public class StartAnimation : MonoBehaviour {
 
     public void StartButtonAction()
     {
-        _cameramovement.canIMove = true;
+        //_cameramovement.canIMove = true;
         _canvasObj.SetActive(false);
 
 

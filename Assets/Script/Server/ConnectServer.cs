@@ -4,7 +4,7 @@ using System;
 
 public class ConnectServer : MonoBehaviour {
 
-    private string _url = "http://localhost/CordaanFolder/Connection.php";
+    private string _url = "http://rj-zoetigheid.nl/CordaanFolder/Connection.php";
 
     [SerializeField]
     private string _userName = "";
