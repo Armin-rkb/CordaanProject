@@ -8,40 +8,41 @@ public class waypointsFollower : MonoBehaviour {
     private int _waypointCounter = 0;
 
     private Vector3 _targetWaypoint;
-
+    private Quaternion _targetWaypointRotation;
     private cameraMovement _cameraMovement;
+    private CameraBehaviour _cameraBehaviour;
     void Start()
     {
         _cameraMovement = GetComponent<cameraMovement>();
+        _cameraBehaviour = GetComponent<CameraBehaviour>();
     }
     void Update()
 	{
-		if (_waypointCounter < _waypoints.Length) {
 			WaypointTracker ();
-		}
 	}
 
 	void WaypointTracker()
 	{
-		
-			_targetWaypoint = _waypoints [_waypointCounter].transform.position;
-			float distanceToWaypoint = (this.transform.position - _targetWaypoint).magnitude;
+	    if (_cameraBehaviour.arrived != true)
+	    {
+	        _targetWaypoint = _waypoints[_waypointCounter].transform.position;
+	        _targetWaypointRotation = _waypoints[_waypointCounter].transform.rotation;
 
-			_cameraMovement.SetTarget (_targetWaypoint);
+	        float distanceToWaypoint = (this.transform.position - _targetWaypoint).magnitude;
 
-			if (distanceToWaypoint < 0.02)
-        {
-				_waypointCounter += 1;
+	        _cameraMovement.SetTarget(_targetWaypoint);
+	        _cameraMovement.GetComponent<CameraRotation>().SetTarget(_targetWaypointRotation);
 
-			print ("Arrived");
-			//send arrived message
-			_cameraMovement.StartCoroutine();
-            
-            
-            if (_waypointCounter >= _waypoints.Length)
-            {
-                _waypointCounter = 0;
-            }
-        }
+	        if (distanceToWaypoint < 0.1f)
+	        {
+	            _cameraBehaviour.arrived = true;
+
+	            _waypointCounter += 1;
+	            if (_waypointCounter >= _waypoints.Length)
+	            {
+	                _waypointCounter = 0;
+	            }
+	        }
+	    }
 	}
 }

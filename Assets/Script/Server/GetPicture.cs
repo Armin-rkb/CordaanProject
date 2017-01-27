@@ -13,8 +13,6 @@ public class GetPicture : MonoBehaviour {
     {
         _newUrl = _url + url;
         _newUrl = _newUrl.Replace("\\","/");
-        Debug.Log(_newUrl);
-
 
         _www = new WWW(_newUrl);
         StartCoroutine(WaitForRequest(_www));
@@ -29,9 +27,6 @@ public class GetPicture : MonoBehaviour {
         tex = new Texture2D(www.texture.width, www.texture.height, TextureFormat.DXT1, false);
         
         Sprite newSprite = Sprite.Create(tex,new Rect(0,0,tex.width,tex.height),new Vector2(0.5f, 0.5f));
-
-        //Renderer renderer = GetComponent<SpriteRenderer>();
-        //renderer.material.mainTexture = www.texture;
 
         www.LoadImageIntoTexture(tex);
         GetComponent<SpriteRenderer>().sprite = newSprite;

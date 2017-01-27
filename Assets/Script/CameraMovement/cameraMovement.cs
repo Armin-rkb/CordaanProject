@@ -11,35 +11,21 @@ public class cameraMovement : MonoBehaviour {
     private Vector3 _currentVelocity = new Vector3(0,0,0);
     private Vector3 _currentPosition;
     private Vector3 _currentTarget;
+    private Quaternion _currentRotation;
 
-	[SerializeField]
-    private bool _canIMove = false;
 
-    public bool canIMove
-    {
-        set { _canIMove = value; }
-    }
 	// Use this for initialization
-	void Start () {
+	void OnEnable () {
         _currentPosition = transform.position;
+
+	    CameraBehaviour.onMoveCamera += Movement;
 	}
 
     public void SetTarget(Vector3 target)
     {
         _currentTarget = target;
-
     }
 
-	public void StartCoroutine()
-	{
-        StartCoroutine(LookingTime(3f));
-
-    }
-	void Update () {
-		if (_canIMove) {
-			Movement();
-		}
-    }
     void Movement()
     {
         Vector3 desiredStep = _currentTarget - _currentPosition;
@@ -58,14 +44,4 @@ public class cameraMovement : MonoBehaviour {
 
     }
 
-	IEnumerator LookingTime(float waitTime)
-	{
-		print ("LookingTime");
-	//	yield return new WaitForSeconds (0.2f);
-		_canIMove = false;
-		print ("Stopped");
-		yield return new WaitForSeconds (waitTime);
-		_canIMove = true;
-		print ("Moving Again");
-	}
 }

@@ -19,7 +19,7 @@ public class ConnectServer : MonoBehaviour {
     private GameObject[] _picturesFrames;
 
 
-    public void ConnectWithServer()
+    public void Start()
     {
         WWWForm form = new WWWForm();
         form.AddField("UserName", _userName);
@@ -37,9 +37,9 @@ public class ConnectServer : MonoBehaviour {
             _wwwInfo = www.text;
             _wwwInfoSplitted = _wwwInfo.Split('\n');
 
-            for (int i = 4 ; i < _wwwInfoSplitted.Length; i++)
+            for (int i = 4 ; i < _picturesFrames.Length+4; i++)
             {
-                print(_wwwInfoSplitted[i]);
+
                 _picturesFrames[i-4].GetComponent<GetPicture>().GetURL(_wwwInfoSplitted[i]);
             }
         }
