@@ -55,6 +55,17 @@ public class SceneSwitch : MonoBehaviour
     }
 
     // This is for Debugging. (Will get removed later)
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.A)){
+            NextSceneArmin();
+        }
+        if (Input.GetKeyDown(KeyCode.R)){
+            NextSceneRaymon();
+        }
+    }
+
+    // This is for Debugging. (Will get removed later)
     public void NextSceneArmin()
     {
         playerData.ActiveUser = NameData.armin;

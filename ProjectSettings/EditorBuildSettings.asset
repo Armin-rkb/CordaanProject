@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scene/RecognitionScene.unity
+    path: Assets/Scene/ArminScenes/MainScene.unity
   - enabled: 1
     path: Assets/Scene/RayScenes/Scene1.unity
