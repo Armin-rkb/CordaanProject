@@ -11,6 +11,13 @@ public class waypointsFollower : MonoBehaviour {
     private Quaternion _targetWaypointRotation;
     private cameraMovement _cameraMovement;
     private CameraBehaviour _cameraBehaviour;
+
+    [SerializeField] private GameObject _sceneSwitchGameObj;
+    
+    private int _amountOfRounds = 0;
+    [SerializeField] private int _maxRounds = 5;
+    [SerializeField] private string _sceneName = "RecognitionScene";
+
     void Start()
     {
         _cameraMovement = GetComponent<cameraMovement>();
@@ -40,7 +47,13 @@ public class waypointsFollower : MonoBehaviour {
 	            _waypointCounter += 1;
 	            if (_waypointCounter >= _waypoints.Length)
 	            {
+	                _amountOfRounds++;
 	                _waypointCounter = 0;
+
+
+                    if (_amountOfRounds >= _maxRounds)
+                        _sceneSwitchGameObj.GetComponent<SceneSwitch>().TransitionToScene(_sceneName,true,false,2f);
+                        
 	            }
 	        }
 	    }
