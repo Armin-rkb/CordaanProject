@@ -5,7 +5,7 @@ public class PlayerData : MonoBehaviour
 {
     public string ActiveUser
     {
-        get { return activeUser; }
+        get { return activeUser;}
         set { activeUser = value; }
     }
     [SerializeField]

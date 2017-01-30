@@ -77,7 +77,7 @@ public class PlayerRecognition : MonoBehaviour
                     bodyJoints[JointsData.Head].transform.position.z +
                     hipCenter.z) / 3;
 
-            if (cameraDistance >= 21f && cameraDistance <= 23f)
+            if (cameraDistance >= 20f && cameraDistance <= 23f)
             {
                 // Getting the distance between the feet, hip and head.
                 playerLength = Vector3.Distance(footDifference, hipCenter) +
@@ -108,16 +108,12 @@ public class PlayerRecognition : MonoBehaviour
                 if (recognitionCount >= maxRecognitionCount)
                     TransitionToMemories();
             }
-            else if (cameraDistance < 21)
+            else if (cameraDistance < 20)
                 playerNameText.text = "Please stand further away from the camera";
 
             else if (cameraDistance > 23)
                 playerNameText.text = "Please stand closer to the camera";
-            // Check if the hip center, head and both feet are not being tracked
-            /*
-            else if (state == Kinect.TrackingState.Inferred)
-                    Debug.Assert(!debugMode, "Not every bone is being tracked. Cant recognize the player.");
-              */
+
             yield return new WaitForSeconds(1);
         }
     }

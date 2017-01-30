@@ -52,9 +52,12 @@ public class waypointsFollower : MonoBehaviour {
 
 
                     if (_amountOfRounds >= _maxRounds)
-                        _sceneSwitchGameObj.GetComponent<SceneSwitch>().TransitionToScene(_sceneName,true,false,2f);
-                        
-	            }
+                    {
+                        _sceneSwitchGameObj.GetComponent<SceneSwitch>().TransitionToScene(_sceneName, true, false, 2f);
+                        PlayerData playerData = FindObjectOfType<PlayerData>();
+                        Destroy(playerData.gameObject);
+                    }
+                }
 	        }
 	    }
 	}

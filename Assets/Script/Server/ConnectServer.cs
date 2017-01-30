@@ -24,7 +24,6 @@ public class ConnectServer : MonoBehaviour {
         _playerData = FindObjectOfType<PlayerData>();
 
         _userName = _playerData.ActiveUser;
-        print(_userName);
     }
     
 
