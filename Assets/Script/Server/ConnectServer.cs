@@ -6,7 +6,7 @@ public class ConnectServer : MonoBehaviour {
 
     private string _url = "http://rj-zoetigheid.nl/CordaanFolder/Connection.php";
 
-    [SerializeField]
+    
     private string _userName = "";
 
     private WWW _www;
@@ -15,9 +15,18 @@ public class ConnectServer : MonoBehaviour {
 
     private string[] _wwwInfoSplitted;
 
+    private PlayerData _playerData;
     [SerializeField]
     private GameObject[] _picturesFrames;
 
+    void Awake()
+    {
+        _playerData = FindObjectOfType<PlayerData>();
+
+        _userName = _playerData.ActiveUser;
+        print(_userName);
+    }
+    
 
     public void Start()
     {

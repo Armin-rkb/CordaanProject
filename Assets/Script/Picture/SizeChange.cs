@@ -41,4 +41,8 @@ public class SizeChange : MonoBehaviour
         }
 
     }
+    void OnDestroy()
+    {
+        CameraBehaviour.onZoom -= OnSize;
+    }
 }

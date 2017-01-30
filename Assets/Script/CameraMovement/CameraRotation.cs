@@ -24,4 +24,8 @@ public class CameraRotation : MonoBehaviour
         transform.rotation = Quaternion.Lerp(this.transform.rotation, _newRotation, Time.deltaTime * _speed);
 
     }
+    void OnDestroy()
+    {
+        CameraBehaviour.onRotationCamera -= Rotation;
+    }
 }

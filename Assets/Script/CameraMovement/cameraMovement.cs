@@ -44,4 +44,8 @@ public class cameraMovement : MonoBehaviour {
 
     }
 
+    void OnDestroy()
+    {
+        CameraBehaviour.onMoveCamera -= Movement;
+    }
 }
