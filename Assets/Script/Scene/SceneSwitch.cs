@@ -26,7 +26,6 @@ public class SceneSwitch : MonoBehaviour
             StartCoroutine(DelayFunction(sceneName, seconds));
         else if (fade && !delay)
             StartCoroutine(FadeToNextScene(sceneName, seconds));
-
     }
 
     IEnumerator FadeToNextScene(string sceneName, float seconds)
@@ -35,7 +34,7 @@ public class SceneSwitch : MonoBehaviour
         {
             if (fadeScreen.color.a < 1)
             {
-                fadeColor.a += 0.01f;
+                fadeColor.a += 0.02f;
                 fadeScreen.color = fadeColor;
             }
 

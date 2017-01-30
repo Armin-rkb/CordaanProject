@@ -13,7 +13,7 @@ public class SizeChange : MonoBehaviour
     {
         // CameraBehaviour.onZoom += ChangeSize;
         ResizeSpriteToScreen(this.gameObject, Camera.main,1,1);
-        Debug.Log("Doing stuff");
+     //   Debug.Log("Doing stuff");
     }
 
     void ResizeSpriteToScreen(GameObject theSprite, Camera theCamera, int fitToScreenWidth, int fitToScreenHeight)
