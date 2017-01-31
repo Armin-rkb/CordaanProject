@@ -465,7 +465,7 @@ MonoBehaviour:
   - {fileID: 1838430705}
   - {fileID: 1601996975}
   _sceneSwitchGameObj: {fileID: 959391308}
-  _maxRounds: 1
+  _maxRounds: 2
   _sceneName: RecognitionScene
 --- !u!114 &652881528
 MonoBehaviour:

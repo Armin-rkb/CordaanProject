@@ -62,6 +62,9 @@ public class SceneSwitch : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R)){
             NextSceneRaymon();
         }
+        if (Input.GetKeyDown(KeyCode.Space)){
+            NextScenePatient();
+        }
     }
 
     // This is for Debugging. (Will get removed later)
@@ -75,6 +78,13 @@ public class SceneSwitch : MonoBehaviour
     public void NextSceneRaymon()
     {
         playerData.ActiveUser = NameData.raymon;
+        SceneManager.LoadScene("Scene1");
+    }
+
+    // This is for Debugging. (Will get removed later)
+    public void NextScenePatient()
+    {
+        playerData.ActiveUser = NameData.patient;
         SceneManager.LoadScene("Scene1");
     }
 }

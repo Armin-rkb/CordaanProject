@@ -2,6 +2,7 @@
 {
     public const string armin = "ArminKarimiBirgani";
     public const string raymon = "RaymonZoetigheid";
+    public const string patient = "Patient";
     public const string unregistered = "Unregistered";
 
     public const float raymonMinLength = 0.84f;
